@@ -60,8 +60,13 @@ SELECT
 		ELSE
 			convert(nvarchar(50),
 			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 + RIGHT(
+<<<<<<< HEAD
 			datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 + 
 			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr], 2) * 100 + 
+=======
+			datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
+			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr], 2) * 100 +
+>>>>>>> origin/master
 			datepart(ISO_WEEK,[dbo].[tblUrenRegistratieRegel].[DatumUrenReg]) * 1
 			)
 	END AS ProjectNr,
@@ -75,7 +80,11 @@ SELECT
 		WHEN '4400' THEN 0
 		WHEN '4450' THEN 0
 		WHEN '4813' THEN 0
+<<<<<<< HEAD
 		ELSE dbo.tblUrenRegistratieRegel.Uren * dbo.tblPersoneel.TariefIntern 
+=======
+		ELSE dbo.tblUrenRegistratieRegel.Uren * dbo.tblPersoneel.TariefIntern
+>>>>>>> origin/master
 	END AS KostenIntern,
 
 	/*dbo.tblUrenRegistratieRegel.Uren * dbo.tblPersoneel.TariefIntern AS KostenIntern, */
@@ -116,11 +125,19 @@ SELECT
 
 FROM
 	dbo.tblUrenRegistratieRegel
+<<<<<<< HEAD
 	JOIN dbo.tblPersoneel ON dbo.tblUrenRegistratieRegel.PersoneelID = dbo.tblPersoneel.PersoneelID 
 	JOIN dbo.zLookupBedrijven ON dbo.tblPersoneel.WerkgeverBV = dbo.zLookupBedrijven.BedrijfsID
 	JOIN dbo.zLookupYearDays AS DMY ON dbo.tblUrenRegistratieRegel.DatumUrenReg = DMY.YearDate
 
 WHERE 
+=======
+	JOIN dbo.tblPersoneel ON dbo.tblUrenRegistratieRegel.PersoneelID = dbo.tblPersoneel.PersoneelID
+	JOIN dbo.zLookupBedrijven ON dbo.tblPersoneel.WerkgeverBV = dbo.zLookupBedrijven.BedrijfsID
+	JOIN dbo.zLookupYearDays AS DMY ON dbo.tblUrenRegistratieRegel.DatumUrenReg = DMY.YearDate
+
+WHERE
+>>>>>>> origin/master
 	dbo.tblUrenRegistratieRegel.Uren is not null
 	/* onderstaande regel niet meenemen, zodat alle uren worden geboekt en dus al het personeel wordt aangemaakt */
 	/* and right([dbo].[tblUrenRegistratieRegel].[ProjectNr],4) NOT IN ('4400', '4450', '4813') */
@@ -135,6 +152,10 @@ WHERE
 /*	and dbo.tblPersoneel.PersoneelNo = '040001001030' */
 
 
+<<<<<<< HEAD
 /* niet overnemen 
+=======
+/* niet overnemen
+>>>>>>> origin/master
 	and datepart(mm, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]) <= 8
 	and dbo.tblPersoneel.Initialen is NULL */
