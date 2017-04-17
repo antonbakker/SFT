@@ -21,10 +21,8 @@ SELECT
 
 	dbo.tblUrenRegistratieRegel.DatumUrenReg AS DatumUrenReg,
 
-	CASE LEFT(
-		[dbo].[tblUrenRegistratieRegel].[ProjectNr],
-		2
-		) -- Situatie 1: 999*
+	CASE LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2)
+ 		-- Situatie 1: 999*
 		WHEN 99 THEN [dbo].[tblUrenRegistratieRegel].[ProjectNr]
 		-- Situatie 2: Hoofdaannemer: Projectnummer2 = Projectnummer, Kostendrager = [null]
 		WHEN [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN [dbo].[tblUrenRegistratieRegel].[ProjectNr]
@@ -32,9 +30,9 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
-			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 + 
-			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 + 
-			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 + 
+			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
+			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
+			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
 			datepart(ISO_WEEK, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]) * 1
 			)
 	END AS ProjectNr,
@@ -51,8 +49,7 @@ SELECT
 	'5920' AS grootboek,
 	'8998' AS dekking,
 
-	CASE LEFT(
-		[dbo].[tblUrenRegistratieRegel].[ProjectNr],2)
+	CASE LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2)
 		-- Situatie 1: 999*
 		WHEN 99 THEN ''
 		-- Situatie 2: Hoofdaannemer: Projectnummer2 = Projectnummer, Kostendrager = [null]
@@ -60,7 +57,7 @@ SELECT
 		-- Situatie 3: Onderaannemer: Projectnummer2 = [], Kostendrager = Projectnummer
 		ELSE [dbo].[tblUrenRegistratieRegel].[ProjectNr]
 	END AS kstdr,
-	
+
 	'Materieel' AS Regeltype
 
 /*
@@ -92,10 +89,10 @@ FROM
 
 WHERE
 	dbo.tblUrenRegistratieRegel.Uren is not null
+	and [dbo].[tblUrenRegistratieRegel].[ProjectNr] not like '99%'
 	and right([dbo].[tblUrenRegistratieRegel].[ProjectNr],4) NOT IN ('4400', '4450', '4813')
 	and dbo.tblUrenRegistratieRegel.Uren <> 0
 	and datepart(yyyy,[dbo].[tblUrenRegistratieRegel].[DatumUrenReg]) >= 2017
-	and [dbo].[tblUrenRegistratieRegel].[ProjectNr] not like '99%'
 
 UNION ALL
 
@@ -118,9 +115,9 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
-			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 + 
-			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 + 
-			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 + 
+			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
+			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
+			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
 			datepart(ISO_WEEK, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]) * 1
 			)
 	END AS ProjectNr,
@@ -146,7 +143,7 @@ SELECT
 		-- Situatie 3: Onderaannemer: Projectnummer2 = [], Kostendrager = Projectnummer
 		ELSE [dbo].[tblUrenRegistratieRegel].[ProjectNr]
 	END AS kstdr,
-	
+
 	'Hulpstuk1' AS Regeltype
 
 /*
@@ -203,9 +200,9 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
-			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 + 
-			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 + 
-			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 + 
+			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
+			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
+			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
 			datepart(ISO_WEEK, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]) * 1
 			)
 	END AS ProjectNr,
@@ -231,7 +228,7 @@ SELECT
 		-- Situatie 3: Onderaannemer: Projectnummer2 = [], Kostendrager = Projectnummer
 		ELSE [dbo].[tblUrenRegistratieRegel].[ProjectNr]
 	END AS kstdr,
-	
+
 	'Hulpstuk2' AS Regeltype
 
 /*
