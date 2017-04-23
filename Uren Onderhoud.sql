@@ -20,6 +20,7 @@ Kostenplaats: materieelstuk
 
 
 SELECT
+	'Onderhoud' AS Type,
 	DMY.WeekNo AS Weeknummer,
 	DMY.YearDateYear AS Jaar,
 
@@ -57,6 +58,34 @@ SELECT
 			datepart(ISO_WEEK,UREN.[DatumUrenReg]) * 1
 			)
 	END AS ProjectNr,
+
+	CASE LEFT(UREN.[ProjectNr],2)
+		-- Situatie 1: 999*
+		WHEN 99 THEN 'Nee'
+		-- Situatie 2: Hoofdaannemer: Projectnummer = Projectnummer, Kostendrager = [null]
+		WHEN BMDW.[ProjectCodePrefix] THEN 'Nee'
+		-- Situatie 3: Onderaannemer: Projectnummer = [], Kostendrager = Projectnummer
+		ELSE 'Ja'
+	END AS Factuur,
+
+	BMDW.Bedrijfsnaam AS Crediteur,
+
+	CASE LEFT(UREN.[ProjectNr],2)
+	-- Situatie 1: 999*
+		WHEN 99 THEN 'Eigen project'
+	-- Situatie 2: Hoofdaannemer: Projectnummer = Projectnummer, Kostendrager = [null]
+	WHEN BMDW.[ProjectCodePrefix] THEN 'Eigen project'
+	-- Situatie 3: Onderaannemer: Projectnummer = [], Kostendrager = Projectnummer
+	ELSE
+		(
+			SELECT
+				[dbo].[zLookupBedrijven].[Bedrijfsnaam]
+			FROM
+				[dbo].[zLookupBedrijven]
+			WHERE
+				[dbo].[zLookupBedrijven].[ProjectCodePrefix] = LEFT(UREN.[ProjectNr],2)
+		)
+	END AS Debiteur,
 
 	CASE BMDW.ProjectCodePrefix
 		-- Situatie 2: Hoofdaannemer: Projectnummer2 = Projectnummer, Kostendrager = [null]

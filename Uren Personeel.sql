@@ -36,6 +36,7 @@ Weeknummr: 5
 
 
 SELECT
+	'Personeel' AS Type,
 	DMY.WeekNo AS Weeknummer,
 	DMY.YearDateYear AS Jaar,
 
@@ -84,6 +85,34 @@ SELECT
 			datepart(ISO_WEEK,[dbo].[tblUrenRegistratieRegel].[DatumUrenReg]) * 1
 			)
 	END AS ProjectNr,
+
+	CASE LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2)
+		-- Situatie 1: 999*
+		WHEN 99 THEN 'Nee'
+		-- Situatie 2: Hoofdaannemer: Projectnummer = Projectnummer, Kostendrager = [null]
+		WHEN [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'Nee'
+		-- Situatie 3: Onderaannemer: Projectnummer = [], Kostendrager = Projectnummer
+		ELSE 'Ja'
+	END AS Factuur,
+
+	[dbo].[zLookupBedrijven].Bedrijfsnaam AS Crediteur,
+
+	CASE LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2)
+		-- Situatie 1: 999*
+		WHEN 99 THEN 'Eigen project'
+		-- Situatie 2: Hoofdaannemer: Projectnummer = Projectnummer, Kostendrager = [null]
+		WHEN [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'Eigen project'
+		-- Situatie 3: Onderaannemer: Projectnummer = [], Kostendrager = Projectnummer
+		ELSE
+			(
+				SELECT
+					[dbo].[zLookupBedrijven].[Bedrijfsnaam]
+				FROM
+					[dbo].[zLookupBedrijven]
+				WHERE
+					[dbo].[zLookupBedrijven].[ProjectCodePrefix] = LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2)
+			)
+	END AS Debiteur,
 
 	dbo.tblUrenRegistratieRegel.Werkzaamheden AS Werkzaamheden,
 	dbo.tblUrenRegistratieRegel.Uren AS Uren,
