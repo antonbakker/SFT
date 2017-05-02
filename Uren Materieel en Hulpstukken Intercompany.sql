@@ -31,6 +31,7 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
+			9900000000 +
 			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
 			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
 			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
@@ -75,8 +76,8 @@ SELECT
 	dbo.tblUrenRegistratieRegel.Uren * dbo.tblMaterieel.TariefIntern AS KostenIntern,
 	dbo.zLookupBedrijven.Bedrijfsnaam AS ProjectBV,
 	dbo.tblUrenRegistratieRegel.UrenregistratieRegelID AS ID,
-	'5920' AS grootboek,
-	'8998' AS dekking,
+	'5925' AS grootboek,
+	'1936' AS dekking,
 
 	CASE LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2)
 		-- Situatie 1: 999*
@@ -144,6 +145,7 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
+			9900000000 +
 			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
 			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
 			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
@@ -188,8 +190,8 @@ SELECT
 	dbo.tblUrenRegistratieRegel.Uren * dbo.tblMaterieel.TariefIntern AS KostenIntern,
 	dbo.zLookupBedrijven.Bedrijfsnaam AS ProjectBV,
 	dbo.tblUrenRegistratieRegel.UrenregistratieRegelID AS ID,
-	'5920' AS grootboek,
-	'8998' AS dekking,
+	'5925' AS grootboek,
+	'1936' AS dekking,
 
 	CASE LEFT(
 		[dbo].[tblUrenRegistratieRegel].[ProjectNr],2)
@@ -258,6 +260,7 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
+			9900000000 +
 			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
 			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
 			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
@@ -302,8 +305,8 @@ SELECT
 	dbo.tblUrenRegistratieRegel.Uren * dbo.tblMaterieel.TariefIntern AS KostenIntern,
 	dbo.zLookupBedrijven.Bedrijfsnaam AS ProjectBV,
 	dbo.tblUrenRegistratieRegel.UrenregistratieRegelID AS ID,
-	'5920' AS grootboek,
-	'8998' AS dekking,
+	'5925' AS grootboek,
+	'1936' AS dekking,
 
 	CASE LEFT(
 		[dbo].[tblUrenRegistratieRegel].[ProjectNr],2)

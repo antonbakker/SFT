@@ -79,8 +79,9 @@ SELECT
 		-- Situatie 3: Onderaannemer: Projectnummer = [], Kostendrager = Projectnummer
 		ELSE
 			convert(nvarchar(50),
-			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 + RIGHT(
-			datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
+			9900000000 +
+			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
+			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
 			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr], 2) * 100 +
 			datepart(ISO_WEEK,[dbo].[tblUrenRegistratieRegel].[DatumUrenReg]) * 1
 			)

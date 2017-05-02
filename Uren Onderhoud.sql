@@ -52,6 +52,7 @@ SELECT
 		-- Situatie 3: Onderaannemer: Projectnummer2 = [], Kostendrager = Projectnummer
 		ELSE
 			convert(nvarchar(50),
+			9900000000 +
 			BMDW.[ProjectCodePrefix] * 1000000 +
 			RIGHT(datepart(yy, UREN.[DatumUrenReg]),2) * 10000 +
 			LEFT(UREN.[ProjectNr], 2) * 100 +

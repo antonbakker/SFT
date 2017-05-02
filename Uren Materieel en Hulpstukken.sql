@@ -31,6 +31,7 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
+			9900000000 +
 			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
 			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
 			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
@@ -143,6 +144,7 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
+			9900000000 +
 			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
 			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
 			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
@@ -256,6 +258,7 @@ SELECT
 			/*WHEN left([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) <> [dbo].[zLookupBedrijven].[ProjectCodePrefix] THEN 'test' */
 		ELSE
 			convert(nvarchar(50),
+			9900000000 +
 			[dbo].[zLookupBedrijven].[ProjectCodePrefix] * 1000000 +
 			RIGHT(datepart(yy, [dbo].[tblUrenRegistratieRegel].[DatumUrenReg]),2) * 10000 +
 			LEFT([dbo].[tblUrenRegistratieRegel].[ProjectNr],2) * 100 +
