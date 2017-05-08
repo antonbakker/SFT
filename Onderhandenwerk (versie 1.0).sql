@@ -5,6 +5,7 @@ SELECT
 	'Personeel' AS Type,
 	DMY.WeekNo AS Weeknummer,
 	DMY.YearDateYear AS Jaar,
+	[dbo].[tblUrenRegistratieRegel].[UrenregistratieRegelID] AS UrenID,
 
 /*
 	dbo.tblUrenRegistratieRegel.DatumUrenReg,
@@ -133,7 +134,7 @@ SELECT
 	'Materieel' AS Type,
 	DMY.WeekNo AS Weeknummer,
 	DMY.YearDateYear AS Jaar,
-
+	[dbo].[tblUrenRegistratieRegel].[UrenregistratieRegelID] AS UrenID,
 /*
 	dbo.tblUrenRegistratieRegel.DatumUrenReg AS DatumUrenReg,
 */
@@ -237,7 +238,7 @@ SELECT
 	'Materieel' AS Type,
 	DMY.WeekNo AS Weeknummer,
 	DMY.YearDateYear AS Jaar,
-
+	[dbo].[tblUrenRegistratieRegel].[UrenregistratieRegelID] AS UrenID,
 /*
 	dbo.tblUrenRegistratieRegel.DatumUrenReg AS DatumUrenReg,
 */
@@ -345,7 +346,7 @@ SELECT
 	'Materieel' AS Type,
 	DMY.WeekNo AS Weeknummer,
 	DMY.YearDateYear AS Jaar,
-
+	[dbo].[tblUrenRegistratieRegel].[UrenregistratieRegelID] AS UrenID,
 /*
 	dbo.tblUrenRegistratieRegel.DatumUrenReg AS DatumUrenReg,
 */
@@ -456,7 +457,7 @@ SELECT
 	'Onderhoud' AS Type,
 	DMY.WeekNo AS Weeknummer,
 	DMY.YearDateYear AS Jaar,
-
+	[UREN].[UrenregistratieRegelID] AS UrenID,
 /*
 	UREN.DatumUrenReg AS DatumUrenReg,
 	convert(char(2), BMDW.ProjectCodePrefix) + right(PERS.PersoneelNo,7) AS PersoneelNo,
