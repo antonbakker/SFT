@@ -1,0 +1,327 @@
+set transaction isolation level read uncommitted
+
+SELECT
+    SzB.Bedrijfsnaam,
+    SP.PersoneelNo,
+    SP.VolledigeNaam,
+    SzD.YeardateYear,
+    SzD.WeekNo,
+    SUR.DatumUrenReg,
+    SUR.Uren,
+    SO.Werknummer,
+    SO.OpdrachtOmschrijving,
+    SUR.UrenregistratieRegelID,
+    alleurenids.Division,
+    alleurenids.freefield5,
+    alleurenids.aantal,
+    alleurenids.project,
+    alleurenids.reknr,
+    alleurenids.dagbknr,
+    alleurenids.oms25,
+    alleurenids.bdr_hfl,
+    alleurenids.debnr,
+    alleurenids.crdnr,
+    alleurenids.kstplcode,
+    alleurenids.kstdrcode,
+    alleurenids.freefield1,
+    alleurenids.freefield2,
+    alleurenids.freefield3,
+    alleurenids.freefield4
+FROM
+    [BB-SERVER\SQLEXPRESS].[Sagro_backend].[dbo].tblUrenRegistratieRegel AS SUR
+    JOIN [BB-SERVER\SQLEXPRESS].[Sagro_backend].[dbo].tblPersoneel AS SP
+    ON SUR.PersoneelID = SP.PersoneelID 
+    JOIN [BB-SERVER\SQLEXPRESS].[Sagro_backend].[dbo].zLookupBedrijven AS SzB
+    ON SzB.BedrijfsID = SP.WerkgeverBV 
+    LEFT JOIN [BB-SERVER\SQLEXPRESS].[Sagro_backend].[dbo].tblMaterieel AS SM
+    ON SUR.MaterieelID = SM.MaterieelID 
+    JOIN [BB-SERVER\SQLEXPRESS].[Sagro_backend].[dbo].zLookupYearDays AS SzD
+    ON SzD.Yeardate = SUR.DatumUrenReg 
+    LEFT JOIN [BB-SERVER\SQLEXPRESS].[Sagro_backend].[dbo].tblOpdracht AS SO
+    ON SO.Werknummer = SUR.ProjectNr
+    LEFT JOIN 
+    (
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+      [521].dbo.gbkmut
+    where
+      freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+      [522].dbo.gbkmut
+    where
+      freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+        [523].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+        [524].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+        [525].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+        freefield5
+    FROM
+        [527].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+        [528].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+        [541].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+        [561].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+        [547].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+    UNION ALL
+
+    SELECT
+      Division,
+      freefield5,
+      aantal,
+      project,
+      reknr,
+      dagbknr,
+      oms25,
+      bdr_hfl,
+      debnr,
+      crdnr,
+      kstplcode,
+      kstdrcode,
+      freefield1,
+      freefield2,
+      freefield3,
+      freefield4
+    FROM
+        [512].dbo.gbkmut
+    where
+        freefield5 is not null
+      and dagbknr in (' 98' , ' 99')
+
+  ) AS alleurenids ON SUR.UrenregistratieRegelID = alleurenids.freefield5
+
+WHERE
+    (SUR.Uren <> 0 or SUR.Uren is not null)
+    AND SzD.YeardateYear >= 2017
+    AND alleurenids.freefield5 is null
+    AND LEN(SO.Werknummer) >= 8
+    AND SUR.Uren <> 0
+--    AND SUR.UrenregistratieRegelID IS NULL
+--    AND datepart(yyyy, SUR.DatumUrenReg) >= 2017
