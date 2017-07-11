@@ -119,15 +119,21 @@ SELECT
 	dbo.tblUrenRegistratieRegel.Uren AS Uren,
 	dbo.tblPersoneel.TariefIntern AS TariefIntern,
 
+/* 2017-07-11 Onderstaande Case verwijderd om er voor te zorgen dat kosten van personeel, ongeacht het project wordt doorbelast. */
+
+
 	/* dbo.tblUrenRegistratieRegel.Uren * dbo.tblPersoneel.TariefIntern AS KostenIntern, */
-	CASE RIGHT([dbo].[tblUrenRegistratieRegel].[ProjectNr],4)
+--	CASE RIGHT([dbo].[tblUrenRegistratieRegel].[ProjectNr],4)
 	-- Testen pf er sprake is van een onderhoudsproject
 	/* onderstaande controle op specifieke projectnummers zorgt er voor dat de personen worden aangemakt in de betreffende werkmaatschappij */
-		WHEN '4400' THEN 0
-		WHEN '4450' THEN 0
-		WHEN '4813' THEN 0
-		ELSE dbo.tblUrenRegistratieRegel.Uren * dbo.tblPersoneel.TariefIntern
-	END AS KostenIntern,
+--		WHEN '4400' THEN 0
+--		WHEN '4450' THEN 0
+--		WHEN '4813' THEN 0
+--		ELSE dbo.tblUrenRegistratieRegel.Uren * dbo.tblPersoneel.TariefIntern
+--	END AS KostenIntern,
+
+/* Nieuwe code */
+	dbo.tblUrenRegistratieRegel.Uren * dbo.tblPersoneel.TariefIntern AS KostenIntern,
 
 	dbo.zLookupBedrijven.Bedrijfsnaam AS ProjectBV,
 	dbo.tblUrenRegistratieRegel.UrenregistratieRegelID AS ID,
